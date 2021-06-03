@@ -9,29 +9,29 @@ Created on Fri May 28 15:18:25 2021
 # Professor:JOISA
 # Nome completo:Juliana Rezende Coutinho
 # Matrícula PUC-Rio:1810391
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
 pd.set_option("display.max_rows",100)
 
-dFilmes=pd.read_excel("Grupo6_excel.xlsx",header=0)
+dFilmes=pd.read_excel("Grupo6_excel.xlsx",index_col=1, header=0)
 
 print(dFilmes)
 
-#Para melhorar a visualizaçÃo do Data Frame eliminaremos a coluna que contém a sinopse do filme
-print('\n DFilmes sem timeline')
+#Para melhorar a visualizaçÃo do Data Frame eliminaremos a coluna que contém a sinopse do filme e a numeração
+print('\n DFilmes sem timeline e Column 1')
 dFilmes.drop(["timeline","Column1"],axis=1,inplace=True)
 print(dFilmes)
 
 #Substituição de valores
-print('\n1 DFilmes com colunas renomeadas em português')
-dFilmes.rename(columns={"name":"Nome","year":"Ano","runtime":"Duração","genre": "Gênero","rating":"Avaliação","metascore":"Nota","votes":"Votos","gross":"Faturamento"},inplace=True)
+print('\n1 DFilmes com colunas e index renomeadas em português')
+dFilmes.rename(columns={"year":"Ano","runtime":"Duração","genre": "Gênero","rating":"Avaliação","metascore":"Nota","votes":"Votos","gross":"Faturamento"},inplace=True)
+dFilmes.index.name = 'Nome'
 print(dFilmes)
 
 print('\n - Preenchendo valores distintos na Nota e Faturamento \
       Em nota com a media da nota dos filmes e em Faturamento com a moda de faturamento')
-media = ( '%.f'%dFilmes.Nota.mean())
+media = int(dFilmes.Nota.mean())
 dFilmes.fillna({'Nota':media,'Faturamento':dFilmes.Faturamento.mode().loc[0]}, inplace=True)
 print(dFilmes)
 
@@ -42,7 +42,7 @@ print(dFilmes)
 
 print('\n3- Nome do(s) filme(s) de maior duração')
 dfMaiorTempo=dFilmes.loc[dFilmes.Duração==dFilmes.Duração.max()]
-print(dfMaiorTempo.Nome.values,"- Tempo de duração:",dFilmes.Duração.max(),"min")
+print('Nome:', list(dfMaiorTempo.index),"- Tempo de duração:",dfMaiorTempo.Duração.max(),"min")
 
 
 print('\n4- Df dos filmes de avaliação maior ou igual a 90')
@@ -79,4 +79,3 @@ agDrama = dfDrama.groupby('Nota')
 print(agDrama)
 dfResposta = agDrama.Avaliação.agg(['count','max','min'])
 print(dfResposta)
-
