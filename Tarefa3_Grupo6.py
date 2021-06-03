@@ -77,5 +77,5 @@ dfDrama=dFilmes.loc[dFilmes.Gênero=="Drama"]
 # print(dfDrama)
 agDrama = dfDrama.groupby('Nota')
 print(agDrama)
-dfResposta = agDrama.Avaliação.agg(['count','max','min'])
+dfResposta = agDrama.Avaliação.agg(['count','max','min','idxmax'])
 print(dfResposta)
