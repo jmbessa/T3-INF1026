@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 pd.set_option("display.max_rows",100)
 
-dFilmes=pd.read_excel("Trabalho_Grupo6.xlsx",index_col=1, header=0)
+dFilmes=pd.read_excel("Grupo6.xlsx",index_col=1, header=0)
 
 print(dFilmes)
 
@@ -40,6 +40,9 @@ dFilmes.Votos = dFilmes.Votos.str.replace(',', '.')
 
 print('\n e) Exiba o dFilmes com as alterações feitas')
 print(dFilmes)
+
+print('\n f) Mostre uma sumarização geral de dFilmes')
+print(dFilmes.describe())
 
 
 print("\n-----------------------------------------------------")
@@ -103,10 +106,16 @@ TabFreqAvaVotos = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
 print(TabFreqAvaVotos)
 
 print("\n-----------------------------------------------------")
-#-------
-#Usar em perguntas
-print('\n3- Nome do(s) filme(s) de maior duração')
-dfMaiorTempo=dFilmes.loc[dFilmes.Duração==dFilmes.Duração.max()]
-print('Nome:', list(dfMaiorTempo.index),"- Tempo de duração:",dfMaiorTempo.Duração.max(),"min")
 
+print('n 5 -Tendo como base os filmes de comédia e faroeste, responda:')
+print('\n a) Crie um dataframe (dFilmesSelec) com os filmes de comédia, faroeste e dfMelhores.')
+dFaroeste=dFilmes.loc[dFilmes.Gênero=="Western"]
 
+dfComedia = dFilmes.loc[dFilmes.Gênero=="Comedy"]
+
+dFilmesSelec = pd.concat([dFaroeste,dfComedia,dfMelhores],join='inner')
+print(dFilmesSelec)
+
+print('\n b) Gráfico de dispersão de Avaliação X Gênero do dFilmesSelec')
+dFilmesSelec.plot.scatter(x='Avaliação',y='Gênero')
+plt.show()
