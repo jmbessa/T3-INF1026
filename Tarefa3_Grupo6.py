@@ -61,7 +61,7 @@ print(TabFreqTempo)
 print("\n-----------------------------------------------------")
 
 print('\n3- Apresente a tabela de Frequencia Percentual (RELATIVA) graficamente')
-TabFreqTempo.plot.pie(title='Tab Freq Percentual Grafica', figsize=(6,6), autopct='%.1f')
+TabFreqTempo.plot.pie(title='Percentual de filmes de acordo com a faixa de duração', figsize=(6,6), autopct='%.1f')
 plt.show()
 
 print("\n-----------------------------------------------------")
