@@ -93,8 +93,8 @@ print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, 
 dfNum = pd.concat([dfMelhores.Avaliação,dfMelhores.Nota,dfMelhores.Votos],axis=1)
 print(dfNum)
 
-print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e nota de dfNum')
-sr = pd.crosstab(dfNum.Avaliação, dfNum.Nota)
+print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e votos de dfNum')
+sr = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
 print(sr)
 
 print("\n-----------------------------------------------------")
