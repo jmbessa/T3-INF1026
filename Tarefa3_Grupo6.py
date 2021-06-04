@@ -37,7 +37,7 @@ print('\n - Preenchendo valores ausentes na Nota e Faturamento \
       Em nota com a sua media e em Faturamento com o valor mais frequente')
 media = int(dFilmes.Nota.mean())
 dFilmes.fillna({'Nota':media,'Faturamento':dFilmes.Faturamento.mode().loc[0]}, inplace=True)
-print(dFilmes)
+print(dFilmes.Nota.append(dFilmes.Faturamento))
 
 print("\n-----------------------------------------------------")
 
