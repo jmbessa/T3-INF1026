@@ -82,17 +82,32 @@ print(dfResposta)
 
 print("\n-----------------------------------------------------")
 
-print('n6 - Por Gênero dos filmes de avaliação maior ou igual a 90, apresente: \
-quantidade de filmes, tempo médio de duração, melhor avaliação e seu nome.')
+print('n6 -Tendo como base os filmes com avalição maior ou igual a 90 (dfMelhores), responda:')
+print('\n a) Exiba o nome dos filmes')
+print('\n b) Por genero dos filmes, apresente a quantidade de filmes, tempo médio de duração e nome da melhor avaliação') 
+print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, nota e votos de dfMelhores')
+print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e nota de dfNum')
+
+print('\n a) Exiba o nome dos filmes')
 dfMelhores=dFilmes.loc[dFilmes.Avaliação>=90]
-# print(dfMelhores)
+print(list(dfMelhores.index))
+
+print('\n b) Por genero dos filmes, apresente a quantidade de filmes, tempo médio de duração e nome da melhor avaliação') 
 agGenero = dfMelhores.groupby('Gênero')
 medDur = agGenero.Duração.agg(['count','mean'])
 medDur.rename(columns={'count':'Quant', 'mean':'TempoMedio'},inplace=True)
-medAva = agGenero.Avaliação.agg(['max','idxmax'])
-medAva.rename(columns={'max':'Nota_max', 'idxmax':'Nome_max'},inplace=True)
+medAva = agGenero.Avaliação.agg(['idxmax'])
+medAva.rename(columns={'idxmax':'Nome_max'},inplace=True)
 dfResp = pd.concat([medDur,medAva],axis=1)
 print(dfResp)
+
+print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, nota e votos de dfMelhores')
+dfNum = pd.concat([dfMelhores.Avaliação,dfMelhores.Nota,dfMelhores.Votos],axis=1)
+print(dfNum)
+
+print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e nota de dfNum')
+sr = pd.crosstab(dfNum.Avaliação, dfNum.Nota)
+print(sr)
 
 #-------
 #Usar em perguntas
