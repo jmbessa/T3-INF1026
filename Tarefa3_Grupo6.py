@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 pd.set_option("display.max_rows",100)
 
-dFilmes=pd.read_excel("Grupo6_excel.xlsx",index_col=1, header=0)
+dFilmes=pd.read_excel("Trabalho_Grupo6.xlsx",index_col=1, header=0)
 
 print(dFilmes)
 
@@ -35,8 +35,12 @@ print('\n    Em faturamento com o valor mais frequente')
 media = int(dFilmes.Nota.mean())
 dFilmes.fillna({'Nota':media,'Faturamento':dFilmes.Faturamento.mode().loc[0]}, inplace=True)
 
-print('\n d) Exiba o dFilmes com as alterações feitas')
+print('\n d) Na coluna Votos, trocar a virgula por ponto')
+dFilmes.Votos = dFilmes.Votos.str.replace(',', '.')
+
+print('\n e) Exiba o dFilmes com as alterações feitas')
 print(dFilmes)
+
 
 print("\n-----------------------------------------------------")
 
@@ -49,6 +53,7 @@ print('\n a) Exiba as categorias')
 dmed=dFilmes.Duração.mean()
 srFxTempoFilmes=pd.cut(dFilmes.Duração,bins=[0,dmed,150,dFilmes.Duração.max()],labels=["Abaixo da média","Regular","Muito Longo"])
 print(srFxTempoFilmes)
+# dFilmes['CAT'] = srFxTempoFilmes
 
 print('\n b) Apresente a tabela de frequencia dos filmes de acordo com a duração')
 TabFreqTempo=srFxTempoFilmes.value_counts()
@@ -64,7 +69,7 @@ print(tfp)
 
 print("\n-----------------------------------------------------")
 
-print('n 3- Por Nota, dos filmes de apenas DRAMA, a quantidade,o max, min e idxmax de Avaliações ')
+print('n 3- Por Nota, dos filmes de apenas DRAMA, a quantidade de filmes,o max, min e idxmax de Avaliações ')
 dfDrama=dFilmes.loc[dFilmes.Gênero=="Drama"]
 # print(dfDrama)
 agDrama = dfDrama.groupby('Nota')
@@ -94,8 +99,8 @@ dfNum = pd.concat([dfMelhores.Avaliação,dfMelhores.Nota,dfMelhores.Votos],axis
 print(dfNum)
 
 print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e votos de dfNum')
-sr = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
-print(sr)
+TabFreqAvaVotos = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
+print(TabFreqAvaVotos)
 
 print("\n-----------------------------------------------------")
 #-------
