@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 28 15:18:25 2021
+Created on Thu Jun  3 17:52:16 2021
 
-@author: jujub_000
+@author: Carolina
 """
-
 # Turma:33D
-# Professor:JOISA
-# Nome completo:Juliana Rezende Coutinho
-# Matrícula PUC-Rio:1810391
+# Professor: Joisa Oliveira
+# Nome completo: Carolina de Moura Costa Gomes Zehuri
+# Matrícula PUC-Rio: 1920965
+# Grupo 6
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -70,6 +71,10 @@ print('\n d) Apresente a tabela de Frequencia Percentual (RELATIVA) NUMERICAMENT
 tfp = TabFreqTempo / dFilmes.shape[0] * 100
 print(tfp)
 
+print('\n d) Apresente a tabela de Frequencia Percentual (RELATIVA) NUMERICAMENTE')
+tfp = TabFreqTempo / dFilmes.shape[0] * 100
+print(tfp)
+
 print("\n-----------------------------------------------------")
 
 print('n 3- Por Nota, dos filmes de apenas DRAMA, a quantidade de filmes,o max, min e idxmax de Avaliações ')
@@ -82,10 +87,10 @@ print(dfResposta)
 
 print("\n-----------------------------------------------------")
 
-print('n 4 -Tendo como base os filmes com avalição maior ou igual a 90 (dfMelhores), responda:')
+print('n 4 -Tendo como base os filmes com avalição maior ou igual a 87 (dfMelhores), responda:')
 
 print('\n a) Exiba o nome dos filmes')
-dfMelhores=dFilmes.loc[dFilmes.Avaliação>=90]
+dfMelhores=dFilmes.loc[dFilmes.Avaliação>=87]
 print(list(dfMelhores.index))
 
 print('\n b) Por genero dos filmes, apresente a quantidade de filmes, tempo médio de duração e nome da melhor avaliação') 
@@ -97,13 +102,18 @@ medAva.rename(columns={'idxmax':'Nome_max'},inplace=True)
 dfResp = pd.concat([medDur,medAva],axis=1)
 print(dfResp)
 
-print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, nota e votos de dfMelhores')
+print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, nota e voto de dfMelhores e exiba a tabela de frequencia resultante do cruzamento de avaliação e votos')
 dfNum = pd.concat([dfMelhores.Avaliação,dfMelhores.Nota,dfMelhores.Votos],axis=1)
-print(dfNum)
-
-print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e votos de dfNum')
 TabFreqAvaVotos = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
 print(TabFreqAvaVotos)
+
+
+print('\n d) Adicione ao dataframe criado anteriormente (dfNum) os valores referentes a Gênero e Ano de dfMelhores e exiba a tabela de frequencia resultando do cruzamento de Gênero e Ano, para a verificação da quantidade de filmes de um determinado gênero que saíram em um respectivo ano, dentre os mais bem classificados')
+dfNum['Gênero'] = dfMelhores.Gênero
+dfNum['Ano'] = dfMelhores.Ano
+TabFreqGenAno = pd.crosstab(dfNum.Gênero, dfNum.Ano, margins = True)
+print(TabFreqGenAno)
+
 
 print("\n-----------------------------------------------------")
 
@@ -119,3 +129,6 @@ print(dFilmesSelec)
 print('\n b) Gráfico de dispersão de Avaliação X Gênero do dFilmesSelec')
 dFilmesSelec.plot.scatter(x='Avaliação',y='Gênero')
 plt.show()
+
+print('n 6 - Criação de tabelas')
+
