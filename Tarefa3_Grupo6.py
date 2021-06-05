@@ -87,10 +87,10 @@ print(dfResposta)
 
 print("\n-----------------------------------------------------")
 
-print('n 4 -Tendo como base os filmes com avalição maior ou igual a 87 (dfMelhores), responda:')
+print('n 4 -Tendo como base os filmes com avalição maior ou igual a 90 (dfMelhores), responda:')
 
 print('\n a) Exiba o nome dos filmes')
-dfMelhores=dFilmes.loc[dFilmes.Avaliação>=87]
+dfMelhores=dFilmes.loc[dFilmes.Avaliação>=90]
 print(list(dfMelhores.index))
 
 print('\n b) Por genero dos filmes, apresente a quantidade de filmes, tempo médio de duração e nome da melhor avaliação') 
@@ -102,18 +102,19 @@ medAva.rename(columns={'idxmax':'Nome_max'},inplace=True)
 dfResp = pd.concat([medDur,medAva],axis=1)
 print(dfResp)
 
-print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, nota e voto de dfMelhores e exiba a tabela de frequencia resultante do cruzamento de avaliação e votos')
+print('\n c) Crie um dataframe (dfNum) com os valores referentes a avaliação, nota e votos de dfMelhores')
 dfNum = pd.concat([dfMelhores.Avaliação,dfMelhores.Nota,dfMelhores.Votos],axis=1)
+print(dfNum)
+
+print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliação e votos de dfNum')
 TabFreqAvaVotos = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
 print(TabFreqAvaVotos)
 
-
-print('\n d) Adicione ao dataframe criado anteriormente (dfNum) os valores referentes a Gênero e Ano de dfMelhores e exiba a tabela de frequencia resultando do cruzamento de Gênero e Ano, para a verificação da quantidade de filmes de um determinado gênero que saíram em um respectivo ano, dentre os mais bem classificados')
+print('\n e) Adicione ao dataframe criado anteriormente (dfNum) os valores referentes a Gênero e Ano de dfMelhores e exiba a tabela de frequencia resultando do cruzamento de Gênero e Ano')
 dfNum['Gênero'] = dfMelhores.Gênero
 dfNum['Ano'] = dfMelhores.Ano
 TabFreqGenAno = pd.crosstab(dfNum.Gênero, dfNum.Ano, margins = True)
 print(TabFreqGenAno)
-
 
 print("\n-----------------------------------------------------")
 
