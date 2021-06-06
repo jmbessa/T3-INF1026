@@ -141,9 +141,3 @@ agGenCAT= dFilmesSelec.groupby(['Gênero','Categoria'])
 dfGenCAT = agGenCAT[['Avaliação','Nota']].agg(['max'])
 dfGenCAT.fillna('-',inplace=True)
 print(dfGenCAT)
-
-print('\n d) Quantidade de filmes no cruzamento de genero X avaliação e ano de dFilmesSelec')
-df=pd.crosstab(index=dFilmesSelec.Gênero,columns=[dFilmesSelec.Avaliação,dFilmesSelec.Ano])
-print(df)
-
-
