@@ -21,7 +21,7 @@ print(dFilmes)
 
 print("\n-----------------------------------------------------")
 
-
+#PERGUNTAS
 print('\n 1- Melhorando o dFilmes:')
 print('\n a) Para melhor visualização, eliminar a coluna sinopse e column1')
 dFilmes.drop(["timeline","Column1"],axis=1,inplace=True)
@@ -30,7 +30,7 @@ print('\n b) Dfilmes com colunas e index renomeadas em português')
 dFilmes.rename(columns={"year":"Ano","runtime":"Duração","genre": "Gênero","rating":"Avaliação","metascore":"Nota","votes":"Votos","gross":"Faturamento"},inplace=True)
 dFilmes.index.name = 'Nome'
 
-print('\n c) Preeencher os valares distintos na Nota e Faturamento:')
+print('\n c) Preencher os valores distintos na Nota e Faturamento:')
 print('\n    Em nota com a sua média')
 print('\n    Em faturamento com o valor mais frequente')
 media = int(dFilmes.Nota.mean())
@@ -47,27 +47,27 @@ print(dFilmes.describe())
 
 
 print("\n-----------------------------------------------------")
-#PERGUNTAS
+
 print('\n 2- Criação de categorias dos filmes de acordo com a duração:')
 print('\n de 0 até média de duração (inclusive) - Abaixo da média')
 print('\n a partir da média até 150 (inclusive) - Regular')
 print('\n acima de 150 - Muito Longo ')
 
-print('\n a) Inclua a coluna Categoria com as respectivas categorias dos filmes')
+print('\n a) Inclua a coluna Categoria com a respectiva categoria dos filmes')
 dmed=dFilmes.Duração.mean()
 srFxTempoFilmes=pd.cut(dFilmes.Duração,bins=[0,dmed,150,dFilmes.Duração.max()],labels=["Abaixo da média","Regular","Muito Longo"])
-print(srFxTempoFilmes)
 dFilmes['Categoria'] = srFxTempoFilmes
+print(dFilmes)
 
-print('\n b) Apresente a tabela de frequencia dos filmes de acordo com a duração')
+print('\n b) Apresente a tabela de frequência dos filmes de acordo com a duração')
 TabFreqTempo=srFxTempoFilmes.value_counts()
 print(TabFreqTempo)
 
-print('\n c) Apresente a tabela de Frequencia Percentual (RELATIVA) graficamente')
+print('\n c) Apresente a tabela de Frequêcia Percentual (RELATIVA) graficamente')
 TabFreqTempo.plot.pie(title='Tab Freq Percentual Grafica', figsize=(6,6), autopct='%.1f')
 plt.show()
 
-print('\n d) Apresente a tabela de Frequencia Percentual (RELATIVA) NUMERICAMENTE')
+print('\n d) Apresente a tabela de Frequencia Percentual (RELATIVA) numericamente')
 tfp = TabFreqTempo / dFilmes.shape[0] * 100
 print(tfp)
 
@@ -89,7 +89,7 @@ print('\n a) Exiba o nome dos filmes')
 dfMelhores=dFilmes.loc[dFilmes.Avaliação>=90]
 print(list(dfMelhores.index))
 
-print('\n b) Por genero dos filmes, apresente a quantidade de filmes, tempo médio de duração e nome da melhor avaliação') 
+print('\n b) Por gênero dos filmes, apresente a quantidade de filmes, tempo médio de duração e nome da melhor avaliação') 
 agGenero = dfMelhores.groupby('Gênero')
 medDur = agGenero.Duração.agg(['count','mean'])
 medDur.rename(columns={'count':'Quant', 'mean':'TempoMedio'},inplace=True)
@@ -106,20 +106,29 @@ print('\n d) Exiba a tabela de frequencia resultante do cruzamento de avaliaçã
 TabFreqAvaVotos = pd.crosstab(dfNum.Avaliação, dfNum.Votos)
 print(TabFreqAvaVotos)
 
-print('\n e) Adicione ao dataframe criado anteriormente (dfNum) os valores referentes a Gênero e Ano de dfMelhores e exiba a tabela de frequencia resultando do cruzamento de Gênero e Ano')
+print('\n e) Adicione ao dataframe criado anteriormente (dfNum) os valores referentes a Gênero e Ano de dfMelhores e exiba a tabela de frequência resultante do cruzamento de Gênero e Ano')
 dfNum['Gênero'] = dfMelhores.Gênero
 dfNum['Ano'] = dfMelhores.Ano
 TabFreqGenAno = pd.crosstab(dfNum.Gênero, dfNum.Ano, margins = True)
 print(TabFreqGenAno)
+
+print('\n f) Tabela de frequencia Gênero X Ano,Faturamento')
+TabFreqGenAnoFat = pd.crosstab(index= dfMelhores.Gênero, columns=[dfMelhores.Ano, dfMelhores.Faturamento])
+print(TabFreqGenAnoFat)
+
+print('\n g) Duração média por gênero X Avaliação,Nota')
+dFilmesCross = pd.crosstab(index= dfMelhores.Gênero, columns=[dfMelhores.Avaliação,dfMelhores.Nota],
+                  values= dfMelhores.Duração, aggfunc='mean')
+dFilmesCross.fillna('-',inplace=True)
+print(dFilmesCross)
+
 
 print("\n-----------------------------------------------------")
 
 print('n 5 -Tendo como base os filmes de comédia e faroeste, responda:')
 print('\n a) Crie um dataframe (dFilmesSelec) com os filmes de comédia, faroeste e dfMelhores.')
 dFaroeste=dFilmes.loc[dFilmes.Gênero=="Western"]
-
 dfComedia = dFilmes.loc[dFilmes.Gênero=="Comedy"]
-
 dFilmesSelec = pd.concat([dFaroeste,dfComedia,dfMelhores],join='inner')
 print(dFilmesSelec)
 
