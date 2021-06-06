@@ -53,11 +53,11 @@ print('\n de 0 até média de duração (inclusive) - Abaixo da média')
 print('\n a partir da média até 150 (inclusive) - Regular')
 print('\n acima de 150 - Muito Longo ')
 
-print('\n a) Exiba as categorias')
+print('\n a) Inclua a coluna Categoria com as respectivas categorias dos filmes')
 dmed=dFilmes.Duração.mean()
 srFxTempoFilmes=pd.cut(dFilmes.Duração,bins=[0,dmed,150,dFilmes.Duração.max()],labels=["Abaixo da média","Regular","Muito Longo"])
 print(srFxTempoFilmes)
-# dFilmes['CAT'] = srFxTempoFilmes
+dFilmes['Categoria'] = srFxTempoFilmes
 
 print('\n b) Apresente a tabela de frequencia dos filmes de acordo com a duração')
 TabFreqTempo=srFxTempoFilmes.value_counts()
