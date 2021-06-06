@@ -123,9 +123,12 @@ dfComedia = dFilmes.loc[dFilmes.Gênero=="Comedy"]
 dFilmesSelec = pd.concat([dFaroeste,dfComedia,dfMelhores],join='inner')
 print(dFilmesSelec)
 
-print('\n b) Gráfico de dispersão de Avaliação X Gênero do dFilmesSelec')
+print('\n b) Quantidade de filmes no cruzamento de genero X avaliação e ano de dFilmesSelec')
+df=pd.crosstab(index=dFilmesSelec.Gênero,columns=[dFilmesSelec.Avaliação,dFilmesSelec.Ano])
+print(df)
+
+print('\n c) Gráfico de dispersão de Avaliação X Gênero do dFilmesSelec')
 dFilmesSelec.plot.scatter(x='Avaliação',y='Gênero')
 plt.show()
 
-print('n 6 - Criação de tabelas')
 
