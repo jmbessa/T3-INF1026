@@ -21,7 +21,7 @@ print(dFilmes)
 
 print("\n-----------------------------------------------------")
 
-#PERGUNTAS
+
 print('\n 1- Melhorando o dFilmes:')
 print('\n a) Para melhor visualização, eliminar a coluna sinopse e column1')
 dFilmes.drop(["timeline","Column1"],axis=1,inplace=True)
@@ -47,7 +47,7 @@ print(dFilmes.describe())
 
 
 print("\n-----------------------------------------------------")
-
+#PERGUNTAS
 print('\n 2- Criação de categorias dos filmes de acordo com a duração:')
 print('\n de 0 até média de duração (inclusive) - Abaixo da média')
 print('\n a partir da média até 150 (inclusive) - Regular')
@@ -66,10 +66,6 @@ print(TabFreqTempo)
 print('\n c) Apresente a tabela de Frequencia Percentual (RELATIVA) graficamente')
 TabFreqTempo.plot.pie(title='Tab Freq Percentual Grafica', figsize=(6,6), autopct='%.1f')
 plt.show()
-
-print('\n d) Apresente a tabela de Frequencia Percentual (RELATIVA) NUMERICAMENTE')
-tfp = TabFreqTempo / dFilmes.shape[0] * 100
-print(tfp)
 
 print('\n d) Apresente a tabela de Frequencia Percentual (RELATIVA) NUMERICAMENTE')
 tfp = TabFreqTempo / dFilmes.shape[0] * 100
