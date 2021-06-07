@@ -3,11 +3,17 @@
 Created on Thu Jun  3 17:52:16 2021
 @author: Carolina
 """
+###############################################################################
 # Turma:33D
 # Professor: Joisa Oliveira
-# Nome completo: Carolina de Moura Costa Gomes Zehuri
-# Matrícula PUC-Rio: 1920965
+# Nome completo: 
+# Matrícula PUC-Rio: 
 # Grupo 6
+# Componentes do grupo: 
+    # Carolina de Moura Costa Gomes Zehuri
+    # João Marcello Bessa Rodrigues
+    # Juliana Rezende Coutinho
+###############################################################################
 
 import pandas as pd
 import matplotlib.pyplot as plt
