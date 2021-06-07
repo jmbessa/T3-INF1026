@@ -40,7 +40,7 @@ print('\n    Em faturamento com o valor mais frequente')
 media = int(dFilmes.Nota.mean())
 dFilmes.fillna({'Nota':media,'Faturamento':dFilmes.Faturamento.mode().loc[0]}, inplace=True)
 
-print('\n d) Na coluna Votos, trocar a virgula por ponto')
+print('\n d) Na coluna Votos, trocar a vírgula por ponto')
 dFilmes.Votos = dFilmes.Votos.str.replace(',', '.')
 
 print('\n e) Exiba o dFilmes com as alterações feitas')
@@ -127,7 +127,7 @@ print(dFilmesCross)
 
 print("\n-----------------------------------------------------")
 
-print('n 5 -Tendo como base os filmes de comédia e faroeste, responda:')
+print('n 5 -Tendo como base os filmes de comédia (Comedy) e faroeste (Western), responda:')
 print('\n a) Crie um dataframe (dFilmesSelec) com os filmes de comédia, faroeste e dfMelhores.')
 dFaroeste=dFilmes.loc[dFilmes.Gênero=="Western"]
 dfComedia = dFilmes.loc[dFilmes.Gênero=="Comedy"]
